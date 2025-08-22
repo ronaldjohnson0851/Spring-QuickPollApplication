@@ -42,7 +42,14 @@ public class PollController {
 
     @RequestMapping(value="/polls", method=RequestMethod.POST)
     public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll) {
+        poll.setId(null);
+
+        if (poll.getOptions() != null ){
+            poll.getOptions().forEach(option -> option.setId(null));
+        }
+
         poll = pollRepository.save(poll);
+
         URI newPollUri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

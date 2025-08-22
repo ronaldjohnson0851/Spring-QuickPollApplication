@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class Poll {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POLL_ID")
     private Long id;
 
